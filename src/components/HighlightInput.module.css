@@ -1,0 +1,13 @@
+.highlightinput {
+    border: 1px solid black;
+	min-height: 50px;
+	max-height: 200px; 
+	overflow-y: auto;
+	resize: none; 
+    margin: 5px;
+    padding: 5px;
+}
+
+.tag {
+	color: #1c9bef;
+}
