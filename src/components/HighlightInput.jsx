@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import ContentEditable from "react-contenteditable";
 
 export default function HighlightInput() {
-	const [html, setHtml] = useState("");
+	const [html, setHtml] = useState("Hello @hrv_vishwakarma @radarr");
 	const contentEditable = useRef(null);
 
 	const onChangeHandler = (e) => {
