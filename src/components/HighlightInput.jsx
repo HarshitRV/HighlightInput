@@ -1,22 +1,29 @@
 import style from "./HighlightInput.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ContentEditable from "react-contenteditable";
 
 export default function HighlightInput() {
 	const [html, setHtml] = useState("Hello @hrv_vishwakarma @radarr");
 	const contentEditable = useRef(null);
 
-	const onChangeHandler = (e) => {
-		let newValue = e.target.value;
+	useEffect(() => {
+		contentEditable.current.focus();
+		setHtml(higlightMentions(contentEditable.current.innerHTML));
+	}, []);
 
+	const higlightMentions = (text) => {
 		// Remove existing spans
-		newValue = newValue.replace(/<span class="\w+">(.*?)<\/span>/g, "$1");
-
+		let newValue = text.replace(/<span class="\w+">(.*?)<\/span>/g, "$1");
 		// Add spans
 		const regex = /@\w+/g;
-		
 		const replacement = (match) => `<span class="${style.tag}">${match}</span>`;
 		newValue = newValue.replace(regex, replacement);
+
+		return newValue;
+	};
+
+	const onChangeHandler = (e) => {
+		let newValue = higlightMentions(e.target.value);
 
 		console.log(newValue);
 		setHtml(newValue);
